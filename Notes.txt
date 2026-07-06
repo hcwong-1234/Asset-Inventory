@@ -1,0 +1,77 @@
+cd D:/laptop_inventory
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\collect_inventory_and_upload.ps1
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Undefined
+
+
+
+mkdir C:\Daikai 2>nul
+
+(
+echo ^<?xml version="1.0" encoding="UTF-16"?^>
+echo ^<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"^>
+echo   ^<RegistrationInfo^>
+echo     ^<Description^>Daikai Crack Detector Monthly Scan^</Description^>
+echo   ^</RegistrationInfo^>
+echo   ^<Triggers^>
+echo     ^<CalendarTrigger^>
+echo       ^<StartBoundary^>2026-04-01T10:00:00^</StartBoundary^>
+echo       ^<Enabled^>true^</Enabled^>
+echo       ^<ScheduleByMonth^>
+echo         ^<DaysOfMonth^>
+echo           ^<Day^>1^</Day^>
+echo         ^</DaysOfMonth^>
+echo         ^<Months^>
+echo           ^<January /^>
+echo           ^<February /^>
+echo           ^<March /^>
+echo           ^<April /^>
+echo           ^<May /^>
+echo           ^<June /^>
+echo           ^<July /^>
+echo           ^<August /^>
+echo           ^<September /^>
+echo           ^<October /^>
+echo           ^<November /^>
+echo           ^<December /^>
+echo         ^</Months^>
+echo       ^</ScheduleByMonth^>
+echo     ^</CalendarTrigger^>
+echo   ^</Triggers^>
+echo   ^<Principals^>
+echo     ^<Principal id="Author"^>
+echo       ^<UserId^>S-1-5-18^</UserId^>
+echo       ^<RunLevel^>HighestAvailable^</RunLevel^>
+echo     ^</Principal^>
+echo   ^</Principals^>
+echo   ^<Settings^>
+echo     ^<MultipleInstancesPolicy^>IgnoreNew^</MultipleInstancesPolicy^>
+echo     ^<DisallowStartIfOnBatteries^>false^</DisallowStartIfOnBatteries^>
+echo     ^<StopIfGoingOnBatteries^>false^</StopIfGoingOnBatteries^>
+echo     ^<AllowHardTerminate^>true^</AllowHardTerminate^>
+echo     ^<StartWhenAvailable^>true^</StartWhenAvailable^>
+echo     ^<RunOnlyIfNetworkAvailable^>false^</RunOnlyIfNetworkAvailable^>
+echo     ^<IdleSettings^>
+echo       ^<StopOnIdleEnd^>true^</StopOnIdleEnd^>
+echo       ^<RestartOnIdle^>false^</RestartOnIdle^>
+echo     ^</IdleSettings^>
+echo     ^<AllowStartOnDemand^>true^</AllowStartOnDemand^>
+echo     ^<Enabled^>true^</Enabled^>
+echo     ^<Hidden^>false^</Hidden^>
+echo     ^<RunOnlyIfIdle^>false^</RunOnlyIfIdle^>
+echo     ^<WakeToRun^>false^</WakeToRun^>
+echo     ^<ExecutionTimeLimit^>PT0S^</ExecutionTimeLimit^>
+echo     ^<Priority^>7^</Priority^>
+echo   ^</Settings^>
+echo   ^<Actions Context="Author"^>
+echo     ^<Exec^>
+echo       ^<Command^>C:\Daikai\scanner.exe^</Command^>
+echo       ^<WorkingDirectory^>C:\Daikai^</WorkingDirectory^>
+echo     ^</Exec^>
+echo   ^</Actions^>
+echo ^</Task^>
+) > C:\Daikai\DaikaiCrackDetectorMonthlyScan.xml
+
+schtasks /Create /TN "Daikai Crack Detector Monthly Scan" /XML "C:\Daikai\DaikaiCrackDetectorMonthlyScan.xml" /F
+
+C:\Daikai\scanner.exe
