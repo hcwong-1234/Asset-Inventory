@@ -3,6 +3,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\collect_inventory_and_upload.ps1
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Undefined
 
+certutil -addstore -f Root "C:\Daikai\Certificate\DaikaiCodeSigning.cer"
+certutil -addstore -f TrustedPublisher "C:\Daikai\Certificate\DaikaiCodeSigning.cer"
+
 
 
 mkdir C:\Daikai 2>nul
@@ -75,3 +78,6 @@ echo ^</Task^>
 schtasks /Create /TN "Daikai Crack Detector Monthly Scan" /XML "C:\Daikai\DaikaiCrackDetectorMonthlyScan.xml" /F
 
 C:\Daikai\scanner.exe
+
+
+
