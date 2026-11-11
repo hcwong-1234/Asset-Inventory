@@ -1,0 +1,76 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Windows executable
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          architecture: x64
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Build executable
+        run: |
+          python -m PyInstaller `
+            --noconfirm `
+            --clean `
+            --onefile `
+            --name HikvisionEventRetriever `
+            retrieve_events.py
+          python -m PyInstaller `
+            --noconfirm `
+            --clean `
+            --onefile `
+            --name HikvisionEventRetrieverAutomated `
+            retrieve_events_automated.py
+          python -m PyInstaller `
+            --noconfirm `
+            --clean `
+            --onefile `
+            --name DSG_automated `
+            retrieve_events_dsg_automated.py
+
+      - name: Verify executables
+        run: |
+          if (-not (Test-Path "dist/HikvisionEventRetriever.exe")) {
+            throw "PyInstaller did not create dist/HikvisionEventRetriever.exe"
+          }
+          if (-not (Test-Path "dist/HikvisionEventRetrieverAutomated.exe")) {
+            throw "PyInstaller did not create dist/HikvisionEventRetrieverAutomated.exe"
+          }
+          if (-not (Test-Path "dist/DSG_automated.exe")) {
+            throw "PyInstaller did not create dist/DSG_automated.exe"
+          }
+          Get-FileHash "dist/HikvisionEventRetriever.exe" -Algorithm SHA256
+          Get-FileHash "dist/HikvisionEventRetrieverAutomated.exe" -Algorithm SHA256
+          Get-FileHash "dist/DSG_automated.exe" -Algorithm SHA256
+
+      - name: Upload executables
+        uses: actions/upload-artifact@v6
+        with:
+          name: HikvisionEventRetriever-Windows-x64
+          path: |
+            dist/HikvisionEventRetriever.exe
+            dist/HikvisionEventRetrieverAutomated.exe
+            dist/DSG_automated.exe
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0

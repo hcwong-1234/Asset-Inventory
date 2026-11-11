@@ -1,0 +1,6 @@
+cd $HOME\Downloads
+cd "DDK_VPN_Setup-20260914T015836Z-1-001"
+cd "DDK_VPN_Setup"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+Unblock-File .\DDK_VPN_Test.ps1
+.\DDK_VPN_Test.ps1

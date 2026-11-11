@@ -1,0 +1,65 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.Spotlight-V100/
+.Trashes/
+ehthumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# PowerShell / Windows output
+logs/
+*.evtx
+*.etl
+*.dmp
+*.tmp
+*.bak
+
+# Local reports and exports
+*.log
+*.csv
+*.tsv
+*.sqlite
+*.db
+*.jsonl
+
+# Secrets and environment files
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+
+# Credentials, keys, and certificates
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+*.csr
+*.der
+*.jks
+*.kdbx
+*.ovpn
+secrets/
+private/
+certs/
+
+# Archives that may contain evidence or secrets
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.tgz

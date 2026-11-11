@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<site-list version="1">
+
+    <site url="pki-platform.softbanktelecom.co.jp/PKI/ee/">
+        <compat-mode>Default</compat-mode>
+        <open-in>IE11</open-in>
+    </site>
+
+    <site url="pki-platform.softbanktelecom.co.jp/PKI/ee/index">
+        <compat-mode>Default</compat-mode>
+        <open-in>IE11</open-in>
+    </site>
+
+    <site url="pki-platform.softbanktelecom.co.jp/PKI/ee/renew/index">
+        <compat-mode>Default</compat-mode>
+        <open-in>IE11</open-in>
+    </site>
+
+</site-list>
